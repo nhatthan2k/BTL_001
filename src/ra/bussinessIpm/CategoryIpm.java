@@ -40,7 +40,7 @@ public class CategoryIpm {
     public static void quantityBookofCatagory() {
         for (Category category : listCategory) {
             long cntCatagory = listBook.stream().filter(book -> book.getCategoryId() == category.getId()).count();
-            System.out.printf("thể loại %s có %d sản phẩm\n", category.getName(), cntCatagory);
+            System.out.printf("thể loại %s có %d sách\n", category.getName(), cntCatagory);
         }
     }
     public static void updateCategory(Scanner scanner) {

@@ -2,11 +2,12 @@ package ra.entity;
 
 import ra.bussiness.IEntity;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 import static ra.presentation.CategoryPresentation.listCategory;
 
-public class Category implements IEntity {
+public class Category implements IEntity, Serializable {
     private int id;
     private String name;
     private boolean status;
@@ -50,12 +51,10 @@ public class Category implements IEntity {
         this.name = inputName(scanner);
         this.status = inputStatus(scanner);
     }
-
     @Override
     public void output() {
 
     }
-
     public int inputId(Scanner scanner) {
         do {
             System.out.println("mã thể loại:");
@@ -157,7 +156,7 @@ public class Category implements IEntity {
                         isExitUpdate = false;
                         break;
                     default:
-                        System.out.println("nhập lựa chọn từ 1-5");
+                        System.out.println("nhập lựa chọn từ 1-4!");
                 }
             } catch (NumberFormatException e) {
                 System.err.println("vui lòng nhâp số nguyên!");

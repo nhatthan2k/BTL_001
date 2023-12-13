@@ -2,13 +2,14 @@ package ra.entity;
 
 import ra.bussiness.IEntity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 import static ra.presentation.BookPresentation.listBook;
 import static ra.presentation.CategoryPresentation.listCategory;
 
-public class Book implements IEntity {
+public class Book implements IEntity, Serializable {
     private String id;
     private String title;
     private String author;
@@ -96,12 +97,10 @@ public class Book implements IEntity {
         this.description = inputDescription(scanner);
         this.categoryId = inputCategoryId(scanner);
     }
-
     @Override
     public void output() {
 
     }
-
     public String inputIdBook(Scanner scanner) {
         do {
             System.out.println("mã sách (bắt đầu bằng “B”, độ dài 4 kí tự):");
@@ -130,7 +129,6 @@ public class Book implements IEntity {
             }
         } while (true);
     }
-
     public String inputTitle(Scanner scanner) {
         do {
             System.out.println("Tiêu đề sách:");
@@ -155,7 +153,6 @@ public class Book implements IEntity {
             }
         } while (true);
     }
-
     public String inputAuthor(Scanner scanner) {
         do {
             System.out.println("Tên tác giả:");
@@ -168,7 +165,6 @@ public class Book implements IEntity {
             }
         } while (true);
     }
-
     public String inputPublisher(Scanner scanner) {
         do {
             System.out.println("Nhà xuất bản:");
@@ -181,14 +177,13 @@ public class Book implements IEntity {
             }
         } while (true);
     }
-
     public int inputYear(Scanner scanner) {
         do {
             System.out.println("Năm xuất bản:");
             try {
                 int year = Integer.parseInt(scanner.nextLine());
 
-                if (year > 1970 && year < LocalDate.now().getYear()) {
+                if (year >= 1970 && year <= LocalDate.now().getYear()) {
                     return year;
                 } else {
                     System.out.println("Năm xuất bản chỉ nhận từ năm 1970 đến hiện tại");
@@ -200,7 +195,6 @@ public class Book implements IEntity {
             }
         } while (true);
     }
-
     public String inputDescription(Scanner scanner) {
         do {
             System.out.println("mô tả sách:");
@@ -213,7 +207,6 @@ public class Book implements IEntity {
             }
         } while (true);
     }
-
     public int inputCategoryId(Scanner scanner) {
         do {
             System.out.println("mã thể loại đã lưu:");
@@ -240,7 +233,6 @@ public class Book implements IEntity {
             System.out.println("không tồn tại mã thể loại trên");
         } while (true);
     }
-
     @Override
     public String toString() {
         return "Book{" +

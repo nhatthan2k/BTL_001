@@ -9,7 +9,9 @@ import java.util.Scanner;
 
 public class CategoryPresentation {
     public static List<Category> listCategory = new ArrayList<>();
+
     public static void categoryMenu(Scanner scanner) {
+        listCategory = CategoryIpm.readCategoryFromFile();
         boolean isExitCategory = true;
         do {
             System.out.println("➢ ===== QUẢN LÝ THỂ LOẠI =====\n" +
@@ -18,7 +20,7 @@ public class CategoryPresentation {
                     "3. Thống kê thể loại và số sách có trong mỗi thể loại\n" +
                     "4. Cập nhật thể loại\n" +
                     "5. Xóa thể loại\n" +
-                    "6. Quay lại\n");
+                    "6. Quay lại");
             System.out.println("Lựa chọn của bạn:");
 
             try {
@@ -27,6 +29,7 @@ public class CategoryPresentation {
                 switch (choice) {
                     case 1:
                         CategoryIpm.addCategory(scanner);
+                        CategoryIpm.writeCategorytoFile();
                         break;
                     case 2:
                         CategoryIpm.sortCategoryByName();
@@ -36,9 +39,11 @@ public class CategoryPresentation {
                         break;
                     case 4:
                         CategoryIpm.updateCategory(scanner);
+                        CategoryIpm.writeCategorytoFile();
                         break;
                     case 5:
                         CategoryIpm.deleteCategory(scanner);
+                        CategoryIpm.writeCategorytoFile();
                         break;
                     case 6:
                         isExitCategory = false;
