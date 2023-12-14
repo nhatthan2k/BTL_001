@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class BookPresentation {
     public static List<Book> listBook = new ArrayList<>();
+
     public static void bookMenu(Scanner scanner) {
         listBook = BookIpm.readBookFromFile();
         boolean isExitBook = true;
@@ -56,6 +57,6 @@ public class BookPresentation {
                 System.err.println(ex.getMessage());
             }
 
-        }while (isExitBook);
+        } while (isExitBook);
     }
 }

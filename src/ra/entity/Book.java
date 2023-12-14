@@ -97,10 +97,30 @@ public class Book implements IEntity, Serializable {
         this.description = inputDescription(scanner);
         this.categoryId = inputCategoryId(scanner);
     }
+
     @Override
     public void output() {
-
+        System.out.printf("| %-15s | %-15s | %-15s | %-5d | %-15s | %-15s | %-15d |\n",
+                this.id, this.title, this.author, this.year, this.publisher, this.description, this.categoryId);
+        System.out.println("+-----------------+-----------------+-----------------+-------+-----------------+-----------------+-----------------+");
     }
+
+    public static void headerDisplayBook() {
+        String separator = "+-----------------+-----------------+-----------------+-------+-----------------+-----------------+-----------------+";
+        String header = "|      ID         |      Title      |      Author     | Year  |    Publisher    |   Description   |   Category ID   |";
+        System.out.printf(separator + "\n"
+                + header + "\n"
+                + separator + "\n"
+        );
+    }
+
+    @Override
+    public String toString() {
+        return String.format("| %-15s | %-15s | %-15s | %-5d | %-15s | %-15s | %-15d |",
+                this.id, this.title, this.author, this.year, this.publisher, this.description, this.categoryId) + "\n" +
+                "+-----------------+-----------------+-----------------+-------+-----------------+-----------------+-----------------+";
+    }
+
     public String inputIdBook(Scanner scanner) {
         do {
             System.out.println("mã sách (bắt đầu bằng “B”, độ dài 4 kí tự):");
@@ -129,12 +149,13 @@ public class Book implements IEntity, Serializable {
             }
         } while (true);
     }
+
     public String inputTitle(Scanner scanner) {
         do {
-            System.out.println("Tiêu đề sách:");
+            System.out.println("Tiêu đề sách (từ 6-50 kí tự):");
             String title = scanner.nextLine();
 
-            if (title.length() > 6 && title.length() < 50) {
+            if (title.trim().length() >= 6 && title.trim().length() <= 50) {
                 boolean isTitle = false;
                 for (Book book : listBook) {
                     if (book.getTitle().equals(title)) {
@@ -153,6 +174,7 @@ public class Book implements IEntity, Serializable {
             }
         } while (true);
     }
+
     public String inputAuthor(Scanner scanner) {
         do {
             System.out.println("Tên tác giả:");
@@ -165,6 +187,7 @@ public class Book implements IEntity, Serializable {
             }
         } while (true);
     }
+
     public String inputPublisher(Scanner scanner) {
         do {
             System.out.println("Nhà xuất bản:");
@@ -177,6 +200,7 @@ public class Book implements IEntity, Serializable {
             }
         } while (true);
     }
+
     public int inputYear(Scanner scanner) {
         do {
             System.out.println("Năm xuất bản:");
@@ -195,6 +219,7 @@ public class Book implements IEntity, Serializable {
             }
         } while (true);
     }
+
     public String inputDescription(Scanner scanner) {
         do {
             System.out.println("mô tả sách:");
@@ -207,6 +232,7 @@ public class Book implements IEntity, Serializable {
             }
         } while (true);
     }
+
     public int inputCategoryId(Scanner scanner) {
         do {
             System.out.println("mã thể loại đã lưu:");
@@ -233,18 +259,7 @@ public class Book implements IEntity, Serializable {
             System.out.println("không tồn tại mã thể loại trên");
         } while (true);
     }
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", publisher='" + publisher + '\'' +
-                ", year=" + year +
-                ", description='" + description + '\'' +
-                ", categoryId=" + categoryId +
-                '}';
-    }
+
     public void updateData(Scanner scanner) {
         boolean isExitUpdate = true;
         do {

@@ -33,6 +33,7 @@ public class BookIpm {
             listBook.add(book);
         }
     }
+
     public static void updateBook(Scanner scanner) {
         System.out.println("nhập vào mã sách cần cập nhật:");
         String updateId = scanner.nextLine();
@@ -50,12 +51,13 @@ public class BookIpm {
             System.out.println("Không tồn tại mã sản phẩm!");
         }
     }
+
     public static void deleteBook(Scanner scanner) {
         System.out.println("mã sản phẩm cần xóa:");
         String deleteId = scanner.nextLine();
         boolean isDelete = false;
 
-        for (Book book: listBook) {
+        for (Book book : listBook) {
             if (book.getId().equals(deleteId)) {
                 listBook.remove(book);
                 isDelete = true;
@@ -68,18 +70,22 @@ public class BookIpm {
             System.out.println("Không tồn tại mã sản phẩm!");
         }
     }
+
     public static void searchBook(Scanner scanner) {
         System.out.println("tên sản phẩm tìm kiếm:");
         String searchName = scanner.nextLine();
-
+        Book.headerDisplayBook();
         listBook.stream().filter(book -> book.getTitle().contains(searchName)).forEach(System.out::println);
     }
+
     public static void booksOfCategory() {
-        for (Category category: listCategory) {
+        for (Category category : listCategory) {
             System.out.printf("thể loại %s\n", category.getName());
+            Book.headerDisplayBook();
             listBook.stream().filter(book -> book.getCategoryId() == category.getId()).forEach(System.out::println);
         }
     }
+
     public static List<Book> readBookFromFile() {
         List<Book> listBookRead = null;
         File file = new File("books.txt");
@@ -109,6 +115,7 @@ public class BookIpm {
         }
         return listBookRead;
     }
+
     public static void writeBookToFile() {
         File file = new File("books.txt");
         FileOutputStream fos = null;

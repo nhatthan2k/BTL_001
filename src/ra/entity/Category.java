@@ -51,13 +51,30 @@ public class Category implements IEntity, Serializable {
         this.name = inputName(scanner);
         this.status = inputStatus(scanner);
     }
+
     @Override
     public void output() {
-
+        System.out.printf("| %-9d | %-14s | %-8b |\n", this.id, this.name, this.status);
+        System.out.println("+-----------+----------------+----------+");
     }
+
+    public static void headerDisplayCategory() {
+        String separator = "+-----------+----------------+----------+";
+        String header = "|    ID     |      Name      |  Status  |";
+        System.out.printf(separator + "\n"
+                + header + "\n"
+                + separator + "\n"
+        );
+    }
+    @Override
+    public String toString() {
+        return String.format("| %-9d | %-14s | %-8b |", this.id, this.name, this.status) + "\n" +
+                "+-----------+----------------+----------+";
+    }
+
     public int inputId(Scanner scanner) {
         do {
-            System.out.println("mã thể loại:");
+            System.out.println("mã thể loại (số nguyên lớn hơn 0):");
             try {
                 int id = Integer.parseInt(scanner.nextLine());
 
@@ -85,12 +102,13 @@ public class Category implements IEntity, Serializable {
             }
         } while (true);
     }
+
     public String inputName(Scanner scanner) {
         do {
-            System.out.println("Tên thể loại:");
+            System.out.println("Tên thể loại (từ 6-30 kí tự):");
             String name = scanner.nextLine();
 
-            if (name.length() > 6 && name.length() < 30) {
+            if (name.trim().length() >= 6 && name.trim().length() <= 30) {
                 boolean isName = false;
                 for (Category category : listCategory) {
                     if (category.getName().equals(name)) {
@@ -109,6 +127,7 @@ public class Category implements IEntity, Serializable {
             }
         } while (true);
     }
+
     public boolean inputStatus(Scanner scanner) {
         do {
             System.out.println("trạng thái thể loại:");
@@ -121,14 +140,7 @@ public class Category implements IEntity, Serializable {
             }
         } while (true);
     }
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", status=" + status +
-                '}';
-    }
+
     public void updateData(Scanner scanner) {
         boolean isExitUpdate = true;
         do {
@@ -160,9 +172,10 @@ public class Category implements IEntity, Serializable {
                 }
             } catch (NumberFormatException e) {
                 System.err.println("vui lòng nhâp số nguyên!");
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 System.err.println(ex.getMessage());
             }
 
-        }while (isExitUpdate);
-    }}
+        } while (isExitUpdate);
+    }
+}

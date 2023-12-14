@@ -33,6 +33,6 @@ public class Main {
             } catch (Exception ex) {
                 System.err.println(ex.getMessage());
             }
-        }while (true);
+        } while (true);
     }
 }

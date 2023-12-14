@@ -34,15 +34,19 @@ public class CategoryIpm {
             listCategory.add(category);
         }
     }
+
     public static void sortCategoryByName() {
+        Category.headerDisplayCategory();
         listCategory.stream().sorted(Comparator.comparing(Category::getName)).forEach(System.out::println);
     }
+
     public static void quantityBookofCatagory() {
         for (Category category : listCategory) {
             long cntCatagory = listBook.stream().filter(book -> book.getCategoryId() == category.getId()).count();
             System.out.printf("thể loại %s có %d sách\n", category.getName(), cntCatagory);
         }
     }
+
     public static void updateCategory(Scanner scanner) {
         System.out.println("nhập vào mã thể loại cần cập nhật:");
         int updateId = Integer.parseInt(scanner.nextLine());
@@ -60,6 +64,7 @@ public class CategoryIpm {
             System.out.println("Không tồn tại mã thể loại!");
         }
     }
+
     public static void deleteCategory(Scanner scanner) {
         System.out.println("mã thể loại cần xóa:");
         int deleteId = Integer.parseInt(scanner.nextLine());
@@ -86,14 +91,16 @@ public class CategoryIpm {
             }
         }
     }
+
     public static boolean hasBook(int catagoryId) {
-        for (Book book: listBook) {
+        for (Book book : listBook) {
             if (book.getCategoryId() == catagoryId) {
                 return true;
             }
         }
         return false;
     }
+
     public static List<Category> readCategoryFromFile() {
         List<Category> listCategoryRead = null;
         File file = new File("categories.txt");
@@ -123,6 +130,7 @@ public class CategoryIpm {
         }
         return listCategoryRead;
     }
+
     public static void writeCategorytoFile() {
         File file = new File("categories.txt");
         FileOutputStream fos = null;
