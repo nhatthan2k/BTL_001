@@ -43,6 +43,7 @@ public class BookIpm {
             if (book.getId().equals(updateId)) {
                 book.updateData(scanner);
                 isUpdate = true;
+                System.out.println("cập nhật thành công!");
                 break;
             }
         }

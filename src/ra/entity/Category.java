@@ -66,6 +66,7 @@ public class Category implements IEntity, Serializable {
                 + separator + "\n"
         );
     }
+
     @Override
     public String toString() {
         return String.format("| %-9d | %-14s | %-8b |", this.id, this.name, this.status) + "\n" +

@@ -56,6 +56,7 @@ public class CategoryIpm {
             if (category.getId() == updateId) {
                 category.updateData(scanner);
                 isUpdate = true;
+                System.out.println("cập nhật thành công!");
                 break;
             }
         }
