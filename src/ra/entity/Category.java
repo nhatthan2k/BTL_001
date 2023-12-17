@@ -89,12 +89,12 @@ public class Category implements IEntity, Serializable {
                     }
 
                     if (isId) {
-                        System.out.println("mã thể loại đã tồn tại! vui lòng nhập lại");
+                        System.err.println("mã thể loại đã tồn tại! vui lòng nhập lại");
                     } else {
                         return id;
                     }
                 } else {
-                    System.out.println("mã thể loại có giá trị lớn hơn 0");
+                    System.err.println("mã thể loại có giá trị lớn hơn 0");
                 }
             } catch (NumberFormatException e) {
                 System.err.println("vui lòng nhập lại kiểu số nguyên!");
@@ -119,12 +119,12 @@ public class Category implements IEntity, Serializable {
                 }
 
                 if (isName) {
-                    System.out.println("tên thể loại đã tồn tại! vui lòng nhập lại");
+                    System.err.println("tên thể loại đã tồn tại! vui lòng nhập lại");
                 } else {
                     return name;
                 }
             } else {
-                System.out.println("tên thể loại có từ 6-30 kí tự");
+                System.err.println("tên thể loại có từ 6-30 kí tự");
             }
         } while (true);
     }
@@ -137,7 +137,7 @@ public class Category implements IEntity, Serializable {
             if (status.equalsIgnoreCase("true") || status.equalsIgnoreCase("false")) {
                 return Boolean.parseBoolean(status);
             } else {
-                System.out.println("trạng thái thể loại chỉ nhận true/false!");
+                System.err.println("trạng thái thể loại chỉ nhận true/false!");
             }
         } while (true);
     }

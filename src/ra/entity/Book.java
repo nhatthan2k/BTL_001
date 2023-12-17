@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import static ra.entity.Category.headerDisplayCategory;
 import static ra.presentation.BookPresentation.listBook;
 import static ra.presentation.CategoryPresentation.listCategory;
 
@@ -98,16 +99,25 @@ public class Book implements IEntity, Serializable {
         this.categoryId = inputCategoryId(scanner);
     }
 
+    public String displayCategoryName(int categoryId) {
+        for (Category category : listCategory) {
+            if (category.getId() == categoryId) {
+                return category.getName();
+            }
+        }
+        return "";
+    }
+
     @Override
     public void output() {
-        System.out.printf("| %-15s | %-15s | %-15s | %-5d | %-15s | %-15s | %-15d |\n",
-                this.id, this.title, this.author, this.year, this.publisher, this.description, this.categoryId);
+        System.out.printf("| %-15s | %-15s | %-15s | %-5d | %-15s | %-15s | %-15s |\n",
+                this.id, this.title, this.author, this.year, this.publisher, this.description, displayCategoryName(this.categoryId));
         System.out.println("+-----------------+-----------------+-----------------+-------+-----------------+-----------------+-----------------+");
     }
 
     public static void headerDisplayBook() {
         String separator = "+-----------------+-----------------+-----------------+-------+-----------------+-----------------+-----------------+";
-        String header = "|      ID         |      Title      |      Author     | Year  |    Publisher    |   Description   |   Category ID   |";
+        String header = "|      ID         |      Title      |      Author     | Year  |    Publisher    |   Description   |   CategoryName  |";
         System.out.printf(separator + "\n"
                 + header + "\n"
                 + separator + "\n"
@@ -116,8 +126,8 @@ public class Book implements IEntity, Serializable {
 
     @Override
     public String toString() {
-        return String.format("| %-15s | %-15s | %-15s | %-5d | %-15s | %-15s | %-15d |",
-                this.id, this.title, this.author, this.year, this.publisher, this.description, this.categoryId) + "\n" +
+        return String.format("| %-15s | %-15s | %-15s | %-5d | %-15s | %-15s | %-15s |",
+                this.id, this.title, this.author, this.year, this.publisher, this.description, displayCategoryName(this.categoryId)) + "\n" +
                 "+-----------------+-----------------+-----------------+-------+-----------------+-----------------+-----------------+";
     }
 
@@ -137,15 +147,15 @@ public class Book implements IEntity, Serializable {
                     }
 
                     if (isIdBook) {
-                        System.out.println("mã sách đã tồn tại! vui lòng nhập lại");
+                        System.err.println("mã sách đã tồn tại! vui lòng nhập lại");
                     } else {
                         return id;
                     }
                 } else {
-                    System.out.println("mã sách bắt đầu là B! vui lòng nhập lại");
+                    System.err.println("mã sách bắt đầu là B! vui lòng nhập lại");
                 }
             } else {
-                System.out.println("mã sách có 4 kí tự! vui lòng nhập lại");
+                System.err.println("mã sách có 4 kí tự! vui lòng nhập lại");
             }
         } while (true);
     }
@@ -165,12 +175,12 @@ public class Book implements IEntity, Serializable {
                 }
 
                 if (isTitle) {
-                    System.out.println("tiêu đề sách đã tồn tại! vui lòng nhập lại");
+                    System.err.println("tiêu đề sách đã tồn tại! vui lòng nhập lại");
                 } else {
                     return title;
                 }
             } else {
-                System.out.println("tiêu đề sách có từ 6-50 kí tự! vui lòng nhập lại");
+                System.err.println("tiêu đề sách có từ 6-50 kí tự! vui lòng nhập lại");
             }
         } while (true);
     }
@@ -181,7 +191,7 @@ public class Book implements IEntity, Serializable {
             String author = scanner.nextLine();
 
             if (author.trim().isEmpty()) {
-                System.out.println("không được bỏ trống tên tác giả! vui lòng nhâp lại");
+                System.err.println("không được bỏ trống tên tác giả! vui lòng nhâp lại");
             } else {
                 return author;
             }
@@ -194,7 +204,7 @@ public class Book implements IEntity, Serializable {
             String publisher = scanner.nextLine();
 
             if (publisher.trim().isEmpty()) {
-                System.out.println("không được bỏ trống nhà xuất bản! vui lòng nhâp lại");
+                System.err.println("không được bỏ trống nhà xuất bản! vui lòng nhâp lại");
             } else {
                 return publisher;
             }
@@ -210,7 +220,7 @@ public class Book implements IEntity, Serializable {
                 if (year >= 1970 && year <= LocalDate.now().getYear()) {
                     return year;
                 } else {
-                    System.out.println("Năm xuất bản chỉ nhận từ năm 1970 đến hiện tại");
+                    System.err.println("Năm xuất bản chỉ nhận từ năm 1970 đến hiện tại");
                 }
             } catch (NumberFormatException e) {
                 System.err.println("vui lòng nhập số nguyên!");
@@ -226,7 +236,7 @@ public class Book implements IEntity, Serializable {
             String description = scanner.nextLine();
 
             if (description.trim().isEmpty()) {
-                System.out.println("không được bỏ trống mô tả! vui lòng nhâp lại");
+                System.err.println("không được bỏ trống mô tả! vui lòng nhâp lại");
             } else {
                 return description;
             }
@@ -237,6 +247,7 @@ public class Book implements IEntity, Serializable {
         do {
             System.out.println("mã thể loại đã lưu:");
             for (Category category : listCategory) {
+                headerDisplayCategory();
                 category.output();
             }
 
@@ -256,7 +267,7 @@ public class Book implements IEntity, Serializable {
                 }
             }
 
-            System.out.println("không tồn tại mã thể loại trên");
+            System.err.println("không tồn tại mã thể loại trên");
         } while (true);
     }
 

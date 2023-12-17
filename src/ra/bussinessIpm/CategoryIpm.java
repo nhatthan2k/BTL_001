@@ -43,7 +43,7 @@ public class CategoryIpm {
     public static void quantityBookofCatagory() {
         for (Category category : listCategory) {
             long cntCatagory = listBook.stream().filter(book -> book.getCategoryId() == category.getId()).count();
-            System.out.printf("thể loại %s có %d sách\n", category.getName(), cntCatagory);
+            System.out.printf("mã thể loại: %d - thể loại %s hiện có %d sách\n", category.getId(), category.getName(), cntCatagory);
         }
     }
 
@@ -62,7 +62,7 @@ public class CategoryIpm {
         }
 
         if (!isUpdate) {
-            System.out.println("Không tồn tại mã thể loại!");
+            System.err.println("Không tồn tại mã thể loại!");
         }
     }
 
@@ -82,13 +82,13 @@ public class CategoryIpm {
         }
 
         if (!isDelete) {
-            System.out.println("Không tồn tại mã thể loại!");
+            System.err.println("Không tồn tại mã thể loại!");
         } else {
             if (CategoryIpm.hasBook(deleteId)) {
-                System.out.println("thể loại chứa sách! không thể xóa");
+                System.err.println("thể loại chứa sách! không thể xóa");
             } else {
                 listCategory.remove(deleteIndex);
-                System.out.println("xóa sách thành công!");
+                System.out.println("xóa thể loại thành công!");
             }
         }
     }

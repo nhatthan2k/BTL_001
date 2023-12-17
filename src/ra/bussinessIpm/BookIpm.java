@@ -49,7 +49,7 @@ public class BookIpm {
         }
 
         if (!isUpdate) {
-            System.out.println("Không tồn tại mã sản phẩm!");
+            System.err.println("Không tồn tại mã sản phẩm!");
         }
     }
 
@@ -68,7 +68,7 @@ public class BookIpm {
         }
 
         if (!isDelete) {
-            System.out.println("Không tồn tại mã sản phẩm!");
+            System.err.println("Không tồn tại mã sản phẩm!");
         }
     }
 
